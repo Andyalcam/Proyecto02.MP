@@ -7,6 +7,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 //import java.util.Scanner;
 
 public class Prueba {
@@ -43,21 +44,12 @@ public class Prueba {
     }
 
     public static void encriptacion(String file, String image) throws IOException {
-        
-        //Scanner in = new Scanner(System.in);
-        //System.out.println("Ingresa la ruta completa del archivo de texto que se ocultará");
-        //String file = in.nextLine();
-
         String message = readMessage(file);
-
-        //System.out.println("Ingresa la ruta completa de la imagen que se va a encriptar");
-
-        //String image = in.nextLine();
 
         BufferedImage bufferedImage = ImageIO.read(new File(image));
 
         if(((bufferedImage.getWidth()*bufferedImage.getHeight())/8) -1 < message.length()){
-            //System.out.println("Ingresa un texto mas pequeño o una imagen de mayor dimensión");
+            throw new IOException();
         }else {
             BufferedImage bufferedImageARGB = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
             String binary = encriptar(message);
