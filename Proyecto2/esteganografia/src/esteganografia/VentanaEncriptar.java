@@ -257,10 +257,14 @@ public class VentanaEncriptar extends javax.swing.JFrame {
             if(estado == true){
             JOptionPane.showMessageDialog(null, "Operación realizada correctamente, la imagen se guardó en el Escritorio");
             }
-        } catch (IOException ex) {
+        } catch (NullPointerException ex) {
             Logger.getLogger(VentanaEncriptar.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Ingresa un texto mas pequeño o una imagen de mayor dimensión", 
-                    "Ingresa un texto mas pequeño o una imagen de mayor dimensión", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex + "Los datos introducidos son incorrectos", 
+                    "ERROR", JOptionPane.WARNING_MESSAGE);
+        } catch(javax.imageio.IIOException ex){
+            
+        } catch (Exception ex) {
+            Logger.getLogger(VentanaEncriptar.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

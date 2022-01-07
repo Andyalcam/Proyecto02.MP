@@ -43,7 +43,7 @@ public class Prueba {
 //        }while(rep);
     }
 
-    public static void encriptacion(String file, String image) throws IOException {
+    public static void encriptacion(String file, String image) throws IOException, Exception {
         String message = readMessage(file);
 
         BufferedImage bufferedImage = ImageIO.read(new File(image));
@@ -161,9 +161,12 @@ public class Prueba {
     }
 
 
-    public static String readMessage(String name){
+    public static String readMessage(String name) throws Exception{
         String message = "";
         String line;
+        if(name == null){
+            throw new NullPointerException();
+        }
         try(BufferedReader reader = new BufferedReader(new FileReader(name))){
             while((line = reader.readLine()) != null){
                 message += line + " ";
