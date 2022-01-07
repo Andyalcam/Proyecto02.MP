@@ -238,7 +238,7 @@ public class VentanaEncriptar extends javax.swing.JFrame {
 
     private void abrir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrir1ActionPerformed
         JFileChooser jf = new JFileChooser();
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.PNG","png");
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("image files","png","jpg");
         jf.setFileFilter(filtro);
         jf.showOpenDialog(this);
         File archivo = jf.getSelectedFile();
