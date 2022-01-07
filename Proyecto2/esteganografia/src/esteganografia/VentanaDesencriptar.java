@@ -2,6 +2,8 @@ package esteganografia;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -254,11 +256,13 @@ public class VentanaDesencriptar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
             }
 
-        } catch (IOException ex) {
+        } catch (NullPointerException ex) {
 
-            JOptionPane.showMessageDialog(null, "Ingresa un texto mas pequeño o una imagen de mayor dimensión",
-                "Ingresa un texto mas pequeño o una imagen de mayor dimensión", JOptionPane.WARNING_MESSAGE);
-        }
+            JOptionPane.showMessageDialog(null, "Los datos ingresados son incorrectos",
+                "ERROR", JOptionPane.WARNING_MESSAGE);
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaDesencriptar.class.getName()).log(Level.SEVERE, null, ex);
+        } 
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

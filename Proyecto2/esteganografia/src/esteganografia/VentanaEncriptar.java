@@ -259,10 +259,8 @@ public class VentanaEncriptar extends javax.swing.JFrame {
             }
         } catch (NullPointerException ex) {
             Logger.getLogger(VentanaEncriptar.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, ex + "Los datos introducidos son incorrectos", 
+            JOptionPane.showMessageDialog(null, "Los datos introducidos son incorrectos", 
                     "ERROR", JOptionPane.WARNING_MESSAGE);
-        } catch(javax.imageio.IIOException ex){
-            
         } catch (Exception ex) {
             Logger.getLogger(VentanaEncriptar.class.getName()).log(Level.SEVERE, null, ex);
         }

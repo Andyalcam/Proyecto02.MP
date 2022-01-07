@@ -112,6 +112,9 @@ public class Prueba {
         //System.out.println("Ingresa la ruta completa de la imagen");
         //String image = in.nextLine();
         
+        if(imagen == null || archivo == null){
+            throw new NullPointerException();
+        }
         BufferedImage bufferedImage = ImageIO.read(new File(imagen));
         String message = "";
 
@@ -175,4 +178,5 @@ public class Prueba {
         }
         return message;
     }
+
 }
