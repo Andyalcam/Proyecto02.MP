@@ -1,7 +1,6 @@
 package esteganografia;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -46,6 +45,7 @@ public class VentanaEncriptar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Encriptar");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -221,8 +221,8 @@ public class VentanaEncriptar extends javax.swing.JFrame {
     }//GEN-LAST:event_rutaActionPerformed
 
     private void abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirActionPerformed
-        JFileChooser jf = new JFileChooser();
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT","txt");
+        JFileChooser jf = new JFileChooser(Prueba.path + "/Desktop");
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.txt","txt");
         jf.setFileFilter(filtro);
         jf.showOpenDialog(this);
         File archivo = jf.getSelectedFile();
@@ -237,7 +237,7 @@ public class VentanaEncriptar extends javax.swing.JFrame {
     }//GEN-LAST:event_ruta1ActionPerformed
 
     private void abrir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrir1ActionPerformed
-        JFileChooser jf = new JFileChooser();
+        JFileChooser jf = new JFileChooser(Prueba.path + "/Desktop");
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("image files","png","jpg");
         jf.setFileFilter(filtro);
         jf.showOpenDialog(this);
@@ -248,6 +248,8 @@ public class VentanaEncriptar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_abrir1ActionPerformed
 
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Prueba a = new Prueba();
         boolean estado = false;
@@ -255,7 +257,15 @@ public class VentanaEncriptar extends javax.swing.JFrame {
             a.encriptacion(direccionArchivoDeTexto,direccionImagen);
             estado = true;
             if(estado == true){
-            JOptionPane.showMessageDialog(null, "Operación realizada correctamente, la imagen se guardó en el Escritorio");
+                JOptionPane.showMessageDialog(null, "Operación realizada correctamente, la imagen se guardó en la misma carpeta que tu imagen ingresada");
+                int option = JOptionPane.showOptionDialog(null, "Desea hacer otra operacion", "¿Desea Salir?", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"SI","NO"}, EXIT_ON_CLOSE);
+                if(option == 0){
+                    VentanaPrincipal newFrame = new VentanaPrincipal();
+                    newFrame.setVisible(true);
+                    this.dispose();
+                }else{
+                    System.exit(0);
+                }
             }
         } catch (NullPointerException ex) {
             Logger.getLogger(VentanaEncriptar.class.getName()).log(Level.SEVERE, null, ex);

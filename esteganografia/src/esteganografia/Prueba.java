@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 public class Prueba {
     //Variable que permite conocer el nombre de usuario de cada pc
-    static String usuario = System.getProperty("user.name");
+    static String path = System.getProperty("user.home");
     
     public static void main(String[] args) throws IOException {
         //Se hace visible la interfaz
@@ -71,12 +71,25 @@ public class Prueba {
                     cont++;
                 }
             }
-
-            File encrypt = new File("C:/Users/" + usuario + "/Desktop/ImagenEncriptada.png");
+           
+            File encrypt = new File(nameFile(image));
 
             ImageIO.write(bufferedImageARGB, "png", encrypt);
         }
         
+    }
+    
+    public static String nameFile(String direccionImagen){
+        String direccionTxt = "";
+        String[] path = direccionImagen.split("\\\\");
+        String[] nameFile = path[path.length-1].split("\\.");
+        String aux = nameFile[0] + "Encriptado.png"; 
+        path[path.length-1] = aux;
+        for(String auxPath : path){
+            direccionTxt += auxPath + "/";
+        }
+        direccionTxt = direccionTxt.substring(0, direccionTxt.length()-1);
+        return direccionTxt;
     }
 
     public static String encriptar(String message){
@@ -108,27 +121,31 @@ public class Prueba {
     }
 
     public static void desencriptacion(String imagen, String archivo) throws IOException {
-        //Scanner in = new Scanner(System.in);
-        //System.out.println("Ingresa la ruta completa de la imagen");
-        //String image = in.nextLine();
-        
+        System.out.println("Oaaaa");
         if(imagen == null || archivo == null){
             throw new NullPointerException();
         }
         BufferedImage bufferedImage = ImageIO.read(new File(imagen));
         String message = "";
-
-        for (int i = 0; i < 200; i++) {
-                Color color = new Color(bufferedImage.getRGB(0,i), true);
-                if(color.getAlpha() == 253)
-                    break;
-                message += 255- color.getAlpha();
-                if((i+1) % 8 == 0 )
-                    message += " ";
-
-        }
         
-        desencriptar(message, archivo);
+        for (int i = 0; i < bufferedImage.getWidth(); i++) {
+            for(int j = 0; j < bufferedImage.getHeight(); j++){
+                Color color = new Color(bufferedImage.getRGB(i,j), true);
+                if(color.getAlpha() == 253){
+                    //desencriptar(message, archivo);
+                    System.out.println(message);
+                    return;
+                }
+                
+                message += 255- color.getAlpha();
+                if((j+1)%8==0){
+                    message += " ";
+                }
+            }
+            
+        }
+       
+        
     }
 
     
