@@ -156,7 +156,7 @@ public class VentanaDesencriptar extends javax.swing.JFrame {
         if(archivo != null){
             ruta.setText(archivo.getAbsolutePath());
             direccionImagen = ruta.getText();
-            String[] path = direccionImagen.split("\\\\");
+            String[] path = direccionImagen.split("/");
             String[] nameFile = path[path.length-1].split("\\.");
             String aux = "Mensaje " + nameFile[0] + ".txt"; 
             path[path.length-1] = aux;
@@ -164,6 +164,8 @@ public class VentanaDesencriptar extends javax.swing.JFrame {
                 direccionTxt += auxPath + "/";
             }
             direccionTxt = direccionTxt.substring(0, direccionTxt.length()-1);
+            System.out.println(direccionImagen);
+            System.out.println(direccionTxt);
         }
     }//GEN-LAST:event_abrirActionPerformed
     
@@ -193,7 +195,7 @@ public class VentanaDesencriptar extends javax.swing.JFrame {
                 }
             }
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "Los datos ingresados son incorrectos", "ERROR", JOptionPane.WARNING_MESSAGE); 
+            JOptionPane.showMessageDialog(null, ex +"Los datos ingresados son incorrectos", "ERROR", JOptionPane.WARNING_MESSAGE); 
         } catch (IllegalArgumentException ex){
             Logger.getLogger(VentanaDesencriptar.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Verifica que la extensión de la imagen sea .png", 

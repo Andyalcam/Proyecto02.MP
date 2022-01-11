@@ -96,8 +96,7 @@ public class Prueba {
     }
 
     public static void desencriptacion(String imagen, String archivo) throws IOException {
-        System.out.println("Oaaaa");
-        if(imagen == null || archivo == null){
+        if(imagen == null){
             throw new NullPointerException();
         }
         BufferedImage bufferedImage = ImageIO.read(new File(imagen));

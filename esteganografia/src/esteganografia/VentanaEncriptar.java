@@ -248,28 +248,16 @@ public class VentanaEncriptar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_abrir1ActionPerformed
 
-    /*public static String nameFile(String direccionImagen){
-            String direccionTxt = "";
-            String[] path = direccionImagen.split("\\\\");
-            String[] nameFile = path[path.length-1].split("\\.");
-            String aux = nameFile[0] + "Encriptado.png"; 
-            path[path.length-1] = aux;
-            for(String auxPath : path){
-                direccionTxt += auxPath + "/";
-            }
-            direccionTxt = direccionTxt.substring(0, direccionTxt.length()-1);
-            return direccionTxt;
-    }*/
     
     private void validacion(String txt, String image) {
         String[] path = txt.split("\\\\");
         String[] nameFile = path[path.length-1].split("\\.");
-        if(!nameFile[1].equals("txt"))
+        if(!nameFile[1].equalsIgnoreCase("txt"))
             throw new IllegalArgumentException();
         
         path = image.split("\\\\");
         nameFile = path[path.length-1].split("\\.");
-        if(!nameFile[1].equals("jpg"))
+        if(!nameFile[1].equalsIgnoreCase("jpg"))
             throw new IllegalArgumentException();
     }
     
