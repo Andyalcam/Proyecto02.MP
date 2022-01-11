@@ -107,7 +107,6 @@ public class Prueba {
                 Color color = new Color(bufferedImage.getRGB(i,j), true);
                 if(color.getAlpha() == 253){
                     desencriptar(list,archivo);
-                    //System.out.println(list);
                     return;
                 }
                 

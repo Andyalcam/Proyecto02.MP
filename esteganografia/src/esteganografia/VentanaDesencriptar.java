@@ -156,7 +156,7 @@ public class VentanaDesencriptar extends javax.swing.JFrame {
         if(archivo != null){
             ruta.setText(archivo.getAbsolutePath());
             direccionImagen = ruta.getText();
-            String[] path = direccionImagen.split("/");
+            String[] path = direccionImagen.split("\\\\");
             String[] nameFile = path[path.length-1].split("\\.");
             String aux = "Mensaje " + nameFile[0] + ".txt"; 
             path[path.length-1] = aux;
