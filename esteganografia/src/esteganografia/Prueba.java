@@ -7,8 +7,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
-//import java.util.Scanner;
 
 public class Prueba {
     //Variable que permite conocer el nombre de usuario de cada pc
@@ -18,29 +16,6 @@ public class Prueba {
         //Se hace visible la interfaz
         VentanaPrincipal a = new VentanaPrincipal();
         a.setVisible(true);
-        
-//        int opc;
-//        boolean rep = false;
-//        Scanner in = new Scanner(System.in);
-//        
-//        
-//        
-//        do{
-//            System.out.println("*** BIENVENIDO ***");
-//            System.out.println("\n¿Qué deseas hacer?");
-//            System.out.println("1. Encriptar");
-//            System.out.println("2. Desencriptar");
-//            System.out.println("Ingrese el número de la opción deseada.");
-//            opc = in.nextInt();
-//            if(opc == 1){
-//                //encriptacion();
-//            }else if(opc == 2){
-//                //desencriptacion();
-//            }else{
-//                System.out.println("\nEscribe 1 o 2");
-//                rep = true;
-//            }
-//        }while(rep);
     }
 
     public static void encriptacion(String file, String image) throws IOException, Exception {
@@ -127,19 +102,21 @@ public class Prueba {
         }
         BufferedImage bufferedImage = ImageIO.read(new File(imagen));
         String message = "";
-        
+        List<String> list = new ArrayList<String>();
         for (int i = 0; i < bufferedImage.getWidth(); i++) {
             for(int j = 0; j < bufferedImage.getHeight(); j++){
                 Color color = new Color(bufferedImage.getRGB(i,j), true);
                 if(color.getAlpha() == 253){
-                    //desencriptar(message, archivo);
-                    System.out.println(message);
+                    desencriptar(list,archivo);
+                    //System.out.println(list);
                     return;
                 }
                 
                 message += 255- color.getAlpha();
+                
                 if((j+1)%8==0){
-                    message += " ";
+                    list.add(message);
+                    message = "";
                 }
             }
             
@@ -149,10 +126,8 @@ public class Prueba {
     }
 
     
-    public static void desencriptar(String message, String ruta) throws IOException{
-        String[] binary = message.split(" ");
-        //String resultado = convertBinary(binary);
-        String mensaje = convertBinary(binary);
+    public static void desencriptar(List<String> message, String ruta) throws IOException{
+        String mensaje = convertBinary(message);
         
         //Se escribe el archivo con el texto desencriptado
         FileWriter archivo = null;
@@ -170,12 +145,11 @@ public class Prueba {
         
     }
 
-    public static String convertBinary(String[] arr){
+    public static String convertBinary(List<String> list){
         StringBuilder message = new StringBuilder();
 
-        for(String character : arr){
-
-            message.append((char) Integer.parseInt(character, 2));
+        for(String character : list){
+            message.append((char) Integer.parseInt(character.substring(0,8), 2));
         }
         return message.toString();
     }

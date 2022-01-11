@@ -166,12 +166,19 @@ public class VentanaDesencriptar extends javax.swing.JFrame {
             direccionTxt = direccionTxt.substring(0, direccionTxt.length()-1);
         }
     }//GEN-LAST:event_abrirActionPerformed
-
+    
+    private void validacion(String image) {
+        String[] path = image.split("\\\\");
+        String[] nameFile = path[path.length-1].split("\\.");
+        if(!nameFile[1].equals("png"))
+            throw new IllegalArgumentException();
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Prueba a = new Prueba();
         boolean estado = false;
         try {
-            System.out.println(direccionTxt);
+            validacion(direccionImagen);
             a.desencriptacion(direccionImagen, direccionTxt);
             estado = true;
             if(estado == true){
@@ -187,9 +194,17 @@ public class VentanaDesencriptar extends javax.swing.JFrame {
             }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "Los datos ingresados son incorrectos", "ERROR", JOptionPane.WARNING_MESSAGE); 
-        } catch (IOException ex) {
+        } catch (IllegalArgumentException ex){
             Logger.getLogger(VentanaDesencriptar.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+            JOptionPane.showMessageDialog(null, "Verifica que la extensión de la imagen sea .png", 
+                    "ERROR", JOptionPane.WARNING_MESSAGE);
+        }catch (IOException ex) {
+            Logger.getLogger(VentanaDesencriptar.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            VentanaDesencriptar newFrame = new VentanaDesencriptar();
+            newFrame.setVisible(true);
+            this.dispose();
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -248,12 +248,37 @@ public class VentanaEncriptar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_abrir1ActionPerformed
 
+    /*public static String nameFile(String direccionImagen){
+            String direccionTxt = "";
+            String[] path = direccionImagen.split("\\\\");
+            String[] nameFile = path[path.length-1].split("\\.");
+            String aux = nameFile[0] + "Encriptado.png"; 
+            path[path.length-1] = aux;
+            for(String auxPath : path){
+                direccionTxt += auxPath + "/";
+            }
+            direccionTxt = direccionTxt.substring(0, direccionTxt.length()-1);
+            return direccionTxt;
+    }*/
     
+    private void validacion(String txt, String image) {
+        String[] path = txt.split("\\\\");
+        String[] nameFile = path[path.length-1].split("\\.");
+        if(!nameFile[1].equals("txt"))
+            throw new IllegalArgumentException();
+        
+        path = image.split("\\\\");
+        nameFile = path[path.length-1].split("\\.");
+        if(!nameFile[1].equals("jpg"))
+            throw new IllegalArgumentException();
+    }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         Prueba a = new Prueba();
         boolean estado = false;
         try {
+            validacion(direccionArchivoDeTexto,direccionImagen);
             a.encriptacion(direccionArchivoDeTexto,direccionImagen);
             estado = true;
             if(estado == true){
@@ -271,8 +296,16 @@ public class VentanaEncriptar extends javax.swing.JFrame {
             Logger.getLogger(VentanaEncriptar.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Los datos introducidos son incorrectos", 
                     "ERROR", JOptionPane.WARNING_MESSAGE);
-        } catch (Exception ex) {
+        } catch (IllegalArgumentException e){
+            Logger.getLogger(VentanaEncriptar.class.getName()).log(Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(null, "Verifica que el texto sea extensión .txt o la imagen sea .jpg", 
+                    "ERROR", JOptionPane.WARNING_MESSAGE);
+        }catch (Exception ex) {
             Logger.getLogger(VentanaEncriptar.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            VentanaEncriptar newFrame = new VentanaEncriptar();
+            newFrame.setVisible(true);
+            this.dispose();
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -345,5 +378,7 @@ public class VentanaEncriptar extends javax.swing.JFrame {
     private javax.swing.JTextField ruta;
     private javax.swing.JTextField ruta1;
     // End of variables declaration//GEN-END:variables
+
+    
 
 }
